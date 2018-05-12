@@ -1,6 +1,3 @@
-# Getting Started with Python on IBM Cloud
-
-To get started, we'll take you through a sample Python Flask app, help you set up a development environment, deploy to IBM Cloud and add a Cloudant database.
 
 ## Prerequisites
 
@@ -9,16 +6,6 @@ You'll need the following:
 * [Cloud Foundry CLI](https://github.com/cloudfoundry/cli#downloads)
 * [Git](https://git-scm.com/downloads)
 * [Python](https://www.python.org/downloads/)
-
-## 1. Clone the sample app
-
-Now you're ready to start working with the app. Clone the repo and change to the directory where the sample app is located.
-  ```
-git clone https://github.com/IBM-Cloud/get-started-python
-cd get-started-python
-  ```
-
-  Peruse the files in the *get-started-python* directory to familiarize yourself with the contents.
 
 ## 2. Run the app locally
 
@@ -96,42 +83,3 @@ Next, we'll add a NoSQL database to this application and set up the application 
 
 Environment variables enable you to separate deployment settings from your source code. For example, instead of hardcoding a database password, you can store this in an environment variable which you reference in your source code. [Learn more...](/docs/manageapps/depapps.html#app_env)
 
-## 6. Use the database
-
-We're now going to update your local code to point to this database. We'll create a json file that will store the credentials for the services the application will use. This file will get used ONLY when the application is running locally. When running in IBM Cloud, the credentials will be read from the VCAP_SERVICES environment variable.
-
-1. Create a file called `vcap-local.json` in the `get-started-python` directory with the following content:
-  ```
-  {
-    "services": {
-      "cloudantNoSQLDB": [
-        {
-          "credentials": {
-            "username":"CLOUDANT_DATABASE_USERNAME",
-            "password":"CLOUDANT_DATABASE_PASSWORD",
-            "host":"CLOUDANT_DATABASE_HOST"
-          },
-          "label": "cloudantNoSQLDB"
-        }
-      ]
-    }
-  }
-  ```
-
-2. Back in the IBM Cloud UI, select your App -> Connections -> Cloudant -> View Credentials
-
-3. Copy and paste the `username`, `password`, and `host` from the credentials to the same fields of the `vcap-local.json` file replacing **CLOUDANT_DATABASE_USERNAME**, **CLOUDANT_DATABASE_PASSWORD**, and **CLOUDANT_DATABASE_URL**.
-
-4. Run your application locally.
-  ```
-python hello.py
-  ```
-
-  View your app at: http://localhost:8000. Any names you enter into the app will now get added to the database.
-
-5. Make any changes you want and re-deploy to IBM Cloud!
-  ```
-cf push
-  ```
-
-  View your app at the URL listed in the output of the push command, for example, *myUrl.mybluemix.net*.
